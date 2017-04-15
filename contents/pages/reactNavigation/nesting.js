@@ -3,55 +3,61 @@ import {
 	AppRegistry,
 	Text,
 	View,
+	Image,
 	Button,
+	StyleSheet,
 } from 'react-native';
 
 // 引入 navigation
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
-// 设置主界面内容
-class RecentChatsScreen extends Component {
+class MyHomeScreen extends Component {
+	static navigationOptions = {
+		title: 'Hello',
+		tabBar: {
+			label: '首页',
+			// Note: By default the icon is only shown on iOS. Search the showIcon option below.
+			icon: ({ tintColor }) => (
+				<Image
+					source={require('../../Img/tabBar/home@1x.png')}
+					style={[styles.icon, {tintColor: tintColor}]}
+				/>
+			),
+		},
+	}
+
 	render() {
 		return (
-			<View>
-			<Text>List of recent chats</Text>
 			<Button
-				onPress={
-					() => this.props.navigation.navigate('Chat', { usr: '宝宝' })}
-				title="Chat with 宝宝"
+				onPress={() => this.props.navigation.navigate('Notifications')}
+				title="Go to notifications"
 			/>
-		</View>
-		)
+		);
 	}
 }
 
-class AllContactsScreen extends Component {
+class MyNotificationsScreen extends React.Component {
+	static navigationOptions = {
+		tabBar: {
+			label: '我的',
+			icon: ({ tintColor }) => (
+				<Image
+					source={require('../../Img/tabBar/user@1x.png')}
+					style={[styles.icon, {tintColor: tintColor}]}
+				/>
+			),
+		},
+	}
+
 	render() {
-		const { navigate } = this.props.navigation;
 		return (
-			<View>
-			<Text>List of recent chats</Text>
 			<Button
-				onPress={
-					() => navigate('Chat', { usr: '祝祝' })}
-				title="Chat with 祝祝"
+				onPress={() => this.props.navigation.goBack()}
+				title="Go back home"
 			/>
-		</View>
-		)
+		);
 	}
 }
-// 设置跳转页面
-const MainScreenNavigator = TabNavigator({
-	Recent: {
-		screen: RecentChatsScreen
-	},
-	All: {
-		screen: AllContactsScreen
-	}
-});
-MainScreenNavigator.navigationOptions = {
-  title: 'My Chats',
-};
 
 // 设置聊天界面内容
 class ChatScreen extends Component {
@@ -69,14 +75,39 @@ class ChatScreen extends Component {
 	}
 }
 
+const styles = StyleSheet.create({
+	icon: {
+		width: 26,
+		height: 26,
+	},
+});
+
+const MyApp = TabNavigator({
+	Home: {
+		screen: MyHomeScreen,
+	},
+	Notifications: {
+		screen: MyNotificationsScreen,
+	},
+}, {
+	tabBarOptions: {
+		activeTintColor: '#e91e63',
+	},
+});
+// MyApp.navigationOptions = {
+//   title: 'My Chats',
+// };
 
 // 设置跳转页面
 const SimpleApp = StackNavigator({
 	Home: {
-		screen: MainScreenNavigator
+		screen: MyApp,
+		navigationOptions: {
+			// title: ({state}) => `${state.params.username}`
+		}
 	},
 	Chat: {
-		screen: ChatScreen
+		screen: ChatScreen,
 	}
 })
 
