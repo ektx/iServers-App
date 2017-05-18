@@ -13,9 +13,8 @@ import {
 	View,
 	Image,
 	TextInput,
-	TabBarIOS,
-	NavigatorIOS,
 	ListView,
+	Button,
 	Dimensions,
 	TouchableOpacity
 } from 'react-native';
@@ -27,8 +26,6 @@ import MomentLocale from 'moment/locale/zh-cn';
 
 import Head from './head';
 import ProjectHome from './projectHome';
-
-import { StackNavigator } from 'react-navigation';
 
 let { height, width } = Dimensions.get('window');
 
@@ -115,6 +112,9 @@ export default class WelcomeView extends Component {
 
 	static navigationOptions = {
 		title: '首页',
+		header: ({ navigate }) => ({
+			left: <Button title="Info" />
+		}),
 		tabBar: {
 			label: '首页',
 			// Note: By default the icon is only shown on iOS. Search the showIcon option below.

@@ -35,7 +35,11 @@ class HomeScreen extends Component {
 // 设置聊天界面内容
 class ChatScreen extends Component {
 	static navigationOptions = {
-		title: ({state}) => `Chat with ${state.params.usr}`
+		title: ({state}) => `Chat with ${state.params.usr}`,
+		header: ({ navigate }) => ({
+			right: <Button title="Info" />,
+			visible: false
+		}),
 	};
 
 	render() {
@@ -55,7 +59,8 @@ const SimpleApp = StackNavigator({
 	},
 	Chat: {
 		screen: ChatScreen
-	}
-})
+	},
+},
+{ headerMode: 'screen' })
 
-AppRegistry.registerComponent('iServers', () => SimpleApp);
+module.exports = SimpleApp;

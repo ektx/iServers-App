@@ -17,6 +17,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 
 // 引入登录页面
 import LoginScreen from './pages/welcome';
+import LoginScreen2 from './pages/welcome2';
 // 首页
 import MyHomeScreen from './pages/homeScreen';
 // 我的
@@ -41,12 +42,18 @@ const MyApp = TabNavigator({
 
 // 设置跳转页面
 const mainApp = StackNavigator({
+	Login: {
+		screen: LoginScreen
+	},
 	Home: {
 		screen: MyApp,
 	},
 	ProjectPage: {
 		screen: projectPage,
 	}
+},{
+	headerMode: 'screen',
+	initialRouteName: 'Home'
 });
 
 module.exports = mainApp;

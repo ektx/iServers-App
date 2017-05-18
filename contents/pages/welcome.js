@@ -3,11 +3,10 @@
 	----------------------------------
 
 	@author: ektx <530675800@qq.com>
-	@date: 2017-4-15 六
+	@date: 2017-4-18 六
 */
 import React, { Component } from 'react';
 import {
-	AppRegistry,
 	StyleSheet,
 	Text,
 	View,
@@ -29,21 +28,36 @@ export default class WelcomeView extends Component {
 		}
 	}
 
-	login = (val)=> {
+	static navigationOptions = {
+		title: 'Login',
+		header: ({ navigate }) => ({
+			visible: false
+		})
+	};
 
+	login = (val)=> {
+				// this.props.navigation.navigate('Home')
+		
 		fetch('http://192.168.0.106:8000/loginIn', {
 			method: 'POST',
 			headers: {
-				'Accept': 'application/json',
+				'Accept': 'application/json, text/plain, */*',
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				user: this.state.name,
 				passwd: this.state.passwd,
 			})
-		}).then( response => {
-			console.log(response)
-		}).catch(err => {
+		})
+		.then( (response) => response.json() )
+		.then( (resJson) => {
+			if (resJson.success) {
+				this.props.navigation.navigate('Home')
+			} else {
+				alert(resJson.msg)
+			}
+		})
+		.catch(err => {
 			console.log(err)
 		})
 
