@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 
 import Button from '../component/button-v1';
+import { TabNavigator, NavigationActions } from 'react-navigation';
 
 let { height, width } = Dimensions.get('window');
 
@@ -36,7 +37,6 @@ export default class WelcomeView extends Component {
 	};
 
 	login = (val)=> {
-				// this.props.navigation.navigate('Home')
 		
 		fetch('http://192.168.0.101:8000/loginIn', {
 			method: 'POST',
@@ -52,7 +52,12 @@ export default class WelcomeView extends Component {
 		.then( (response) => response.json() )
 		.then( (resJson) => {
 			if (resJson.success) {
-				this.props.navigation.navigate('Home')
+				// this.props.navigation.navigate('Home')
+				const resetActions = NavigationActions.reset({
+					index: 0,
+					actions: [NavigationActions.navigate({routeName: 'Home'})]
+				});
+				this.props.navigation.dispatch( resetActions )
 			} else {
 				alert(resJson.msg)
 			}
