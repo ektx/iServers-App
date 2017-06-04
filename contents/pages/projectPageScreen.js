@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import {
-	AppRegistry,
-	Text,
-	View,
-	Image,
-	Button,
-} from 'react-native';
+import { WebView } from 'react-native';
 
 // 引入 navigation
 // import { TabNavigator, StackNavigator } from 'react-navigation';
+let url = 'http://localhost:8000/ektx/';
 
 class MyHomeScreen extends Component {
+
 
 	static navigationOptions = {
 	    headerVisible: false,
@@ -18,10 +14,10 @@ class MyHomeScreen extends Component {
 	}
 
 	render() {
+		const {state} = this.props.navigation;
 		return (
-			<Button
-				onPress={() => this.props.navigation.navigate('Notifications')}
-				title="Go to notifications k"
+			<WebView
+			source={{uri: url + state.params.data.name}}
 			/>
 		);
 	}

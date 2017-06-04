@@ -25,7 +25,6 @@ import Moment from 'moment';
 import MomentLocale from 'moment/locale/zh-cn';
 
 import Head from './head';
-import ProjectHome from './projectHome';
 
 let { height, width } = Dimensions.get('window');
 
@@ -58,7 +57,7 @@ export default class WelcomeView extends Component {
 		// 本地模拟数据
 		// let url = 'http://192.168.0.106:9000/iServer/其它/moke.json';
 		// cnodejs api
-		let url = 'http://192.168.0.106:8000/api/v1/ektx/';
+		let url = 'http://localhost:8000/api/v1/ektx/';
 
 		fetch(url)
 		.then( res => res.json())
@@ -82,7 +81,7 @@ export default class WelcomeView extends Component {
 				style={styles.rowCell}
 				onPress={ () => 
 					this.pushToProjectHome( rowData )
-				 }
+				}
 			>
 				<View>
 					<Text style={styles.header}>{rowData.name}</Text>

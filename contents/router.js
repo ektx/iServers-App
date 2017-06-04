@@ -53,7 +53,7 @@ const mainApp = StackNavigator({
 	}
 },{
 	headerMode: 'screen',
-	initialRouteName: 'Home'
+	initialRouteName: 'Login'
 });
 
 module.exports = mainApp;

@@ -38,7 +38,7 @@ export default class WelcomeView extends Component {
 	login = (val)=> {
 				// this.props.navigation.navigate('Home')
 		
-		fetch('http://192.168.0.106:8000/loginIn', {
+		fetch('http://192.168.0.101:8000/loginIn', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json, text/plain, */*',

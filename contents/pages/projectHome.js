@@ -15,7 +15,8 @@ import {
   TextInput,
   TabBarIOS,
   NavigatorIOS,
-  Dimensions
+  Dimensions,
+  WebView
 } from 'react-native';
 
 let { height, width } = Dimensions.get('window');
